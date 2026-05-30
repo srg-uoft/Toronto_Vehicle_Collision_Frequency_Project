@@ -1,5 +1,14 @@
 ---
-title: "inf2167_group7_paper_proposal"
-format: html
+title: "Toronto Rush Hour Traffic Analysis"
+subtitle: "INF2167 Group Project "
+author: 
+  - Stella Gregorski
+  - Yiying Qin
+thanks: "Code and data are available at: [https://github.com/srg-uoft/INF2167_Group7_Project](https://github.com/srg-uoft/INF2167_Group7_Project)."
+date: today
+date-format: long
+abstract: "abstract goes here"
+format: pdf
+number-sections: true
+bibliography: INF2167_Project_References.bib
 ---
-
