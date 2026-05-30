@@ -1,6 +1,6 @@
 ---
 title: "Toronto Rush Hour Traffic Analysis"
-subtitle: "INF2167 Group Project "
+subtitle: "INF2167 Project - Group 7"
 author: 
   - Stella Gregorski
   - Yiying Qin
@@ -12,3 +12,68 @@ format: pdf
 number-sections: true
 bibliography: INF2167_Project_References.bib
 ---
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+# set up our R environment for the report by importing all the libraries we will need
+library(tidyverse)
+library(opendatatoronto)
+```
+
+# Introduction
+Welcome...
+
+# Research Questions(s) & Hypothesis
+This project will aim to address some research questions and preeminent assumptions about traffic patterns, as discussed below.
+
+## Questions
+Our research questions are...
+
+## Hypotheses
+Some hypotheses we have are...
+
+# Relevant Literature
+According to [@cite-tellingstorieswithdata]...
+
+# Dataset & Methods
+## Dataset
+### Data Source
+Dataset obtained from [@cite-traffic_data].
+
+### Measurement
+Our data was measured by...
+
+### Data Structure
+This is how our dataset is structured
+
+### Key Variables
+Key variables from our dataset are...
+
+## Methods
+Methods we plan to apply in our analysis are...
+
+# Exploratory Data Analysis
+## Overview
+Data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse].
+
+## Key Aspect 1
+One key dataset aspect that relates to our variables of interest is...
+
+## Key Aspect 2
+Another key dataset aspect that relates to our variables of interest is...
+
+## Key Aspect 3
+Another key dataset aspect that relates to our variables of interest is...
+
+# Next Steps
+Report Presentation Adjustments
+
+\newpage
+
+# References
+
+::: {#refs}
+:::
