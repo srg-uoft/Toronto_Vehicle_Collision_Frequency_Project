@@ -40,6 +40,7 @@ Our research questions are...
 ## Hypotheses
 
 Some hypotheses we have are...
+These are of interest because...
 
 # Relevant Literature
 
@@ -51,15 +52,11 @@ congestion in Canadian cities not only costs time and sacrafices productivities,
 
 ## Dataset
 
-### Data Source
+### Source
 
 Dataset obtained from [@cite-traffic_data].
 
-### Measurement
-
-Our data was measured by...
-
-### Data Structure
+### Structure
 
 This is how our dataset is structured
 
@@ -75,7 +72,7 @@ Methods we plan to apply in our analysis are...
 
 ## Overview
 
-Data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse].
+Initial exploratory data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse], with the goal of uncovering high-level trends and possible variables of interest for further analysis. Key discoveries which we hope will aid in answering our research question are elaborated on below. 
 
 ## Key Aspect 1
 
@@ -91,7 +88,7 @@ Another key dataset aspect that relates to our variables of interest is...
 
 # Next Steps
 
-Having outlined the research question of interest, target data set, and preliminary exploratory data analysis above, the team will move into more detailed and thorough analysis of the dataset to identify any trends which could help address the primary research question. Final conclusions, along with raw results and any models used in their generation, will be presented in a final report and oral presentation in the coming months. 
+Having outlined the research question of interest, target data set, and preliminary exploratory data analysis above, we will move into more detailed and thorough analysis of the dataset to identify any trends which could help address the primary research question. Conclusions and discussion, along with raw results and any models used in their generation, will be presented in a final report and oral presentation in August 2026. 
 
 \newpage
 
