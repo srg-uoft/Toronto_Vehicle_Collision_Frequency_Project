@@ -47,7 +47,6 @@ According to [@cite-tellingstorieswithdata]...
 
 congestion in Canadian cities not only costs time and sacrafices productivities, but also increases environmental burdens by more greenhouse gas emission. (https://comt.ca/Reports/High%20Cost%20of%20Congestion%202012.pdf)
 
-
 # Dataset & Methods
 
 ## Dataset
@@ -92,7 +91,7 @@ Another key dataset aspect that relates to our variables of interest is...
 
 # Next Steps
 
-Report Presentation Adjustments
+Having outlined the research question of interest, target data set, and preliminary exploratory data analysis above, the team will move into more detailed and thorough analysis of the dataset to identify any trends which could help address the primary research question. Final conclusions, along with raw results and any models used in their generation, will be presented in a final report and oral presentation in the coming months. 
 
 \newpage
 
