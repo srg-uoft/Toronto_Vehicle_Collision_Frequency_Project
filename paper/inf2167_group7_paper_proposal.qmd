@@ -26,7 +26,7 @@ library(opendatatoronto)
 
 # Introduction
 
-Welcome...
+*Stella: I think the goal for this is a brief 1-2 sentences to give an overview of the project*
 
 # Research Questions(s) & Hypothesis
 
@@ -34,16 +34,34 @@ This project will aim to address some research questions and preeminent assumpti
 
 ## Questions
 
-Our research questions are...
+*Stella's Rough Notes: *
+
+*Note: mention using a data first approach, finding an interesting and up to date data set and determining what questions can be answered with it*
+
+*What are the most accident-prone locations and times for travellers in the GTA, and how does that vary depending on mode of transportation?*
+
+*Does the GTA’s data align with pre-existing research on riskiest travel times?*
+
 
 ## Hypotheses
 
-Some hypotheses we have are...
-These are of interest because...
+*Stella's Rough Notes:*
+
+*GTA traffic risk is similar to pre-established riskiest days for accidents*
+
+*Some hypotheses we have are...*
+
+*These are of interest because...*
 
 # Relevant Literature
 
-According to [@cite-tellingstorieswithdata]...
+*Stella's Ideas For Potential Sources*
+
+*Days that have statistically the most car accidents*
+
+*Mortality rates of various transportation methods*
+
+*Toronto statistically has the worst traffic*
 
 congestion in Canadian cities not only costs time and sacrafices productivities, but also increases environmental burdens by more greenhouse gas emission. (https://comt.ca/Reports/High%20Cost%20of%20Congestion%202012.pdf)
 
@@ -53,7 +71,7 @@ congestion in Canadian cities not only costs time and sacrafices productivities,
 
 ### Source
 
-Dataset obtained from [@cite-traffic_data].
+Dataset obtained from [CITE TPS HERE].
 
 ### Structure
 
