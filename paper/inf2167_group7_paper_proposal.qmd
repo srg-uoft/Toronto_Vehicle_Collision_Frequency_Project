@@ -80,15 +80,15 @@ Methods we plan to employ include line charts for trends in accidents over time,
 
 # Exploratory Data Analysis
 ## Overview
-Initial exploratory data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse], with the goal of uncovering high-level trends and possible variables of interest for further analysis. Key discoveries which we hope will aid in answering our research question in future reports are elaborated on below. Filepaths were made relative using the Here package [@cite-here] to improve reproducibility.
+Initial exploratory data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse], with the goal of uncovering high-level trends and possible variables of interest for further analysis. Filepaths were made relative using the Here package [@cite-here] to improve reproducibility. Key discoveries which we hope will aid in answering our research question in future reports are elaborated on below. 
 
-## Key Aspect 1
+## Types of Vehicles Stored as Columns
 One key dataset aspect that relates to our variables of interest is...
 
-## Key Aspect 2
+## Combined & Separated Temporal Variables
 Another key dataset aspect that relates to our variables of interest is...
 
-## Key Aspect 3
+## Missing Spatial Data
 Another key dataset aspect that relates to our variables of interest is...
 
 # Next Steps
