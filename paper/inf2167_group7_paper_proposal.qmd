@@ -37,8 +37,7 @@ collisions_long <- collisions |>
 
 ```
 # Introduction
-Urban mobility in the Greater Toronto Area (GTA) is shaped by dense traffic volumes, multimodal travel patterns, and complex interactions among different groups (drivers, cyclists, pedestrians, and people taking transits). Understanding conditions and causes of collisions are essential for improving road safety by designing targeted interventions, and aligning municipal planning with evidence based risk patterns. This project adopts a data first approach in exploring a up to date open dataset published by the Toronto Police Service (TPS).
-The dataset enables a investigation of collision patterns across time, location, and mode of travel, via its detailed records in large scale. In this way, we can examine whether collision trends in Toronto align with broader research on high risk travel periods including holidays, along with neighborhoods and modes of transportation with highest safety risks.
+Travel pattern in the Greater Toronto Area (GTA) involves dense traffic volumes, multimodal travel, and complex interactions among different groups (drivers, cyclists, pedestrians, and transit users). Understanding when and where collisions occur is essential for designing targeted safety interventions and supporting evidence based municipal planning. Our project applies a data driven approach using an up to date collision dataset published by the Toronto Police Service (TPS), whose detailed records enable analysis of temporal and spatial patterns with different modes of travel. Through this dataset, we assess whether Toronto’s collision trends align with broader research on travel periods with higher risks and identify neighborhoods with elevated safety risks involving different travel modes.
 
 # Research Questions
 ## What are the most accident-prone locations and times for travellers in the GTA, and how does that vary depending on mode of transportation?
