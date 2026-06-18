@@ -1,5 +1,5 @@
 ---
-title: "Toronto Rush Hour Traffic Analysis"
+title: "Collision Frequency Trends for Various Vehicle Types in the Greater Toronto Area"
 subtitle: "INF2167 Project - Group 7"
 author: 
   - Stella Gregorski
@@ -115,7 +115,7 @@ collisions |>
 ```
 
 ## Types of Vehicles Stored as Columns
-A key part of our analysis is investigating how risk of collision for travellers changes with mode of transportation. To this end, the TPS dataset contains 5 columns, each of which provides a yes/no as to whether cars, public transit vehicles, motorcycles, bicycles, or pedestrians were included in the accident. While this is useful data to have, it is not tidy data, and we will need to pivot the dataframe so each row is an individual vehicle involved in an accident before we can determine trends by vehicle type. (@fig-yes-no-vehicles) shows a basic use case for this pivoted data, and giving us preliminary data about how frequently the various modes of transportation are involved in collisions.
+A key part of our analysis involves seeing how risky travel times change for different vehicle types. The TPS dataset contains 5 columns of particular interest for this, each providing a yes/no binary as to whether cars, public transit vehicles, motorcycles, bicycles, or pedestrians were involved in the accident. By pivoting the dataframe so each row is an individual vehicle involved in an accident (rather than a separate variable), we can determine trends by vehicle type. (@fig-yes-no-vehicles) shows a basic use case for this pivoted data, assessing how frequently various vehicle types are involved in collisions.
 ```{r}
 #| label: fig-yes-no-vehicles
 #| fig-cap: What Types of Vehicles Were Involved in Each Recorded Traffic Collision from 2020-2026
