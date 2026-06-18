@@ -21,6 +21,10 @@ bibliography: INF2167_Project_References.bib
 
 # set up our R environment for the report by importing all the libraries we will need
 library(tidyverse)
+library(here)
+
+# enable visual generation by importing the dataset
+collisions <- read_csv(here("data/02 - analysis data", "working-data-2020-2026.csv"))
 ```
 
 # Introduction
@@ -28,7 +32,6 @@ library(tidyverse)
 *Stella: I think the goal for this is a brief 1-2 sentences to give an overview of the project*
 
 # Research Questions(s) & Hypothesis
-
 ## Questions
 
 *Stella's Rough Notes: *
@@ -38,7 +41,6 @@ library(tidyverse)
 *What are the most accident-prone locations and times for travellers in the GTA, and how does that vary depending on mode of transportation?*
 
 *Does the GTA’s data align with pre-existing research on riskiest travel times?*
-
 
 ## Hypotheses
 
@@ -63,45 +65,33 @@ library(tidyverse)
 congestion in Canadian cities not only costs time and sacrafices productivities, but also increases environmental burdens by more greenhouse gas emission. (https://comt.ca/Reports/High%20Cost%20of%20Congestion%202012.pdf)
 
 # Dataset & Methods
-
 ## Dataset
-
 ### Source
-
-The data used in this analysis is the Traffic Collisions Open Data (ASR-T-TBL-001) dataset, obtained from [@cite-tpsdata] and licensed under the Open Government Licence – Ontario. 
+The data used in this analysis is the Traffic Collisions Open Data (ASR-T-TBL-001) dataset, obtained from [@cite-tpsdata] and licensed under the Open Government Licence – Ontario. The Toronto Police Service (TPS) maintains a Public Safety Data Portal, where they regularly publish and update datasets regarding crime statistics in the Greater Toronto Area, including the Traffic Collisions Open Data dataset. 
 
 ### Structure
-
-This is how our dataset is structured
+TPS defines a collision for the purposes of this dataset as "the contact resulting from the motion of a motor vehicle or streetcar or its load, which produces property damage, injury or death" [@cite-tpsdata]. To that end, each row/observation in the dataset represents a single collision, and the columns/variables describe the collision in three ways: 1) spatial/temporal information about where and when the collision occurred, 2) information about whether there were injuries, deaths, or property damage, and whether parties failed to remain at the scene, and 3) which types of vehicles were involved in the collision. 
 
 ### Key Variables
-
-Key variables from our dataset are...
+To answer the question of where the highest risk of traffic collision for various modes of transportation is in the Greater Toronto Area, our primary variables of interest are the spatial and temporal variables (to determine where and when the most accidents occur), and the information about involved vehicles (to determine any diverging trends between modes of transportation). 
 
 ## Methods
-
-Methods we plan to apply in our analysis are...
+Methods we plan to employ include line charts for trends in accidents over time, and bar charts showing accident frequencies for each type of vehicle in each month. We also plan on utilizing summary statistic tables, particularly to show the most dangerous areas of Toronto for individual types of vehicles. This will likely involve the use of data pivoting to turn separate transportation columns into individual rows, as well as grouping and faceting to show differences in collision frequency. 
 
 # Exploratory Data Analysis
-
 ## Overview
-
-Initial exploratory data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse], with the goal of uncovering high-level trends and possible variables of interest for further analysis. Key discoveries which we hope will aid in answering our research question in future reports are elaborated on below. 
+Initial exploratory data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse], with the goal of uncovering high-level trends and possible variables of interest for further analysis. Key discoveries which we hope will aid in answering our research question in future reports are elaborated on below. Filepaths were made relative using the Here package [@cite-here] to improve reproducibility.
 
 ## Key Aspect 1
-
 One key dataset aspect that relates to our variables of interest is...
 
 ## Key Aspect 2
-
 Another key dataset aspect that relates to our variables of interest is...
 
 ## Key Aspect 3
-
 Another key dataset aspect that relates to our variables of interest is...
 
 # Next Steps
-
 Having outlined the research question of interest, target data set, and preliminary exploratory data analysis above, we will move into more detailed and thorough analysis of the dataset to identify any trends which could help address the primary research question. Conclusions and discussion, along with raw results and any models used in their generation, will be presented in a final report and oral presentation in August 2026. 
 
 \newpage
