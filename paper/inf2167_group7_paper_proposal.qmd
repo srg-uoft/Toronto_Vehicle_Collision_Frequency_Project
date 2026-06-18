@@ -55,25 +55,24 @@ Scholars consistently conclude that road traffic collisions cluster in both loca
 Temporal patterns in collision risk are also documented already by scholars. Anowar, Yasmin, and Tay (2013) compare crashes during statutory holidays and regular weekends in Alberta. They find that severe collision occurrences are less than estimated. Certain days (especially major holidays) carry elevated collision risk, which inspires our interest in comparing GTA collision patterns to commonly recognized high risk days.
 
 # Dataset & Methods
-## Dataset
-### Source
-The data used in this analysis is the Traffic Collisions Open Data (ASR-T-TBL-001) dataset, obtained from [@cite-tpsdata] and licensed under the Open Government Licence – Ontario. The Toronto Police Service (TPS) maintains a Public Safety Data Portal, where they regularly publish and update datasets regarding crime statistics in the Greater Toronto Area, including the Traffic Collisions Open Data dataset. 
+## Data Source
+The Toronto Police Service (TPS) maintains a Public Safety Data Portal, where they regularly publish and update crime statistics datasets for the Greater Toronto Area. The data used in this analysis is the Traffic Collisions Open Data (ASR-T-TBL-001) dataset, obtained from [@cite-tpsdata] and licensed under the Open Government Licence – Ontario. 
 
-### Structure
-TPS defines a collision for the purposes of this dataset as "the contact resulting from the motion of a motor vehicle or streetcar or its load, which produces property damage, injury or death" [@cite-tpsdata]. To that end, each row/observation in the dataset represents a single collision, and the columns/variables describe the collision in three ways: 1) spatial/temporal information about where and when the collision occurred, 2) information about whether there were injuries, deaths, or property damage, and whether parties failed to remain at the scene, and 3) which types of vehicles were involved in the collision. 
+## Data Structure
+Per [@cite-tpsdata], each row/observation in this dataset represents a single collision, and the columns/variables use identification variables to describe each collision in three ways: 1) where and when the collision occurred, 2) whether there were injuries, deaths, or property damage, and whether parties failed to remain at the scene, and 3) which types of vehicles were involved in the collision.
 
-### Key Variables
+## Dataset Key Variables
 To answer the question of where the highest risk of traffic collision for various modes of transportation is in the Greater Toronto Area, our primary variables of interest are the spatial and temporal variables (to determine where and when the most accidents occur), and the information about involved vehicles (to determine any diverging trends between modes of transportation). 
 
 ## Methods
-Methods we plan to employ include line charts for trends in accidents over time, and bar charts showing accident frequencies for each type of vehicle in each month. We also plan on utilizing summary statistic tables, particularly to show the most dangerous areas of Toronto for individual types of vehicles. This will likely involve the use of data pivoting to turn separate transportation columns into individual rows, as well as grouping and faceting to show differences in collision frequency. 
+We plan on evaluating trends using statistics summary tables and visuals, using bar charts, line graphs, and summarized variable counts to show trends in accident frequency for different vehicle types at different points in the year, or in different Toronto neighborhoods. To reveal trends for separate vehicle types, we will use data pivoting to turn separate transportation columns into individual rows, as well as grouping and faceting in our visuals to show differences in collision frequency. 
 
 # Exploratory Data Analysis
 ## Overview
 Initial exploratory data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse], with the goal of uncovering high-level trends and possible variables of interest for further analysis. Filepaths were made relative using the Here package [@cite-here] to improve reproducibility, and color palettes are courtesy of [@cite-paletteer]. Key discoveries which we hope will aid in answering our research question in future reports are elaborated on below. 
 
 ## Separated Temporal Variables
-As mentioned in [@cite-tellingstorieswithdata], dates can be a tricky form of data to work with, as their class and formatting can very often not work with common data analysis methods, and they can take significant cleaning to make useful. However, this dataset not only has the data represented in string format, it also has separate columns with the year and hour of the collision represented as doubles, and day of the week and month represented as character strings. Given our focus on finding the riskiest times for travellers in various transportation modes to be on the road in Toronto, the ability to count collisions for individual months or hours, as well as specific dates, will be helpful in drawing conclusions. A preliminary example is shown in (@fig-accidents-per-month), which shows which months have the most collisions reported.
+As mentioned in [@cite-tellingstorieswithdata], dates can be inconsistent and difficult to work with, and can take significant cleaning to make useful. However, this dataset not only contains full date-time strings, but also has separate columns for year, month name, hour of the day, and day of the week, all with expected double or character data types, allowing for significant granularity in analysis without extra pre-processing. This is particularly useful for our research question, given its focus on broadly analyzing temporal trends in collision risk. An exploratory example of using this temporal data is (@fig-accidents-per-month), showing which months have the most collisions reported.
 
 ```{r}
 #| label: fig-accidents-per-month
@@ -93,7 +92,7 @@ collisions |> # use the regular wide data since we want individual crashes not i
 ```
 
 ## Missing Spatial Data
-An aspect of our research we may encounter more issues with is spatial data. The dataset includes a column for which Toronto neighbourhood each collision occurred in, as well as a crash latitude and longitude, which could be useful in determining where travellers face the highest risk. However, after visualizing where the most crashes are taking place, we see in (@tbl-missing-spatial-data) that "NAS", or crashes where no spatial data was recorded, is the most frequently occuring value in the Neighbourhood column, making up around 17% of the entries. We will have to determine doing forward whether these should be dropped, or whether our research question could be amended to omit spatial investigation.
+An aspect we may encounter more issues with is spatial data. The dataset includes a column for which Toronto neighborhood each collision occurred in, as well as a crash latitude and longitude, which could be useful in determining where travelers face the highest risk. However, we see in (@tbl-missing-spatial-data) that "NAS", or crashes where no spatial data was recorded, is the most frequently occurring value in the "NEIGHBOURHOOD-158" column, comprising around 17% of entries. We will have to determine what the implications would be for dropping these observations, or whether to amend our research question to only focus on temporal risk trends.
 
 ```{r}
 #| label: tbl-missing-spatial-data
@@ -139,7 +138,7 @@ counts_by_vehicle_type |>
 ```
 
 # Next Steps
-Having outlined the research question of interest, target data set, and preliminary exploratory data analysis above, we will move into more detailed and thorough analysis of the dataset to identify any trends which could help address the primary research question. Conclusions and discussion, along with raw results and any models used in their generation, will be presented in a final report and oral presentation in August 2026. 
+Having outlined our research questions, gathered data, and conducted preliminary exploratory data analysis, our next steps are conduct deeper analysis to identify further trends in collision risk. Conclusions and discussion, along with raw results and any models used, will be presented in a final report and oral presentation in August 2026. 
 
 \newpage
 
