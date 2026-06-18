@@ -22,14 +22,20 @@ bibliography: INF2167_Project_References.bib
 # set up our R environment for the report by importing all the libraries we will need
 library(tidyverse)
 library(here)
+library(paletteer)
 
 # enable visual generation by importing the dataset
 collisions <- read_csv(here("data/02 - analysis data", "working-data-2020-2026.csv"))
+
+# enable further visual generation by making a long, tidy version of the data
+collisions_long <- collisions |>
+  pivot_longer(
+    cols = c(AUTOMOBILE, MOTORCYCLE, PASSENGER, BICYCLE, PEDESTRIAN), 
+    names_to = "Vehicle_Type", 
+    values_to = "Involved"
+)
+
 ```
-
-# Introduction
-
-*Stella: I think the goal for this is a brief 1-2 sentences to give an overview of the project*
 
 # Research Questions(s) & Hypothesis
 ## Questions
@@ -82,21 +88,71 @@ Methods we plan to employ include line charts for trends in accidents over time,
 ## Overview
 Initial exploratory data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse], with the goal of uncovering high-level trends and possible variables of interest for further analysis. Filepaths were made relative using the Here package [@cite-here] to improve reproducibility, and color palettes are courtesy of [@cite-paletteer]. Key discoveries which we hope will aid in answering our research question in future reports are elaborated on below. 
 
-## Combined & Separated Temporal Variables
-valuable to have both separated temporal variable components and a combined string
-can evaluate if there are months or hours where more accidents occurred 
+## Separated Temporal Variables
+As mentioned in [@cite-tellingstorieswithdata], dates can be a tricky form of data to work with, as their class and formatting can very often not work with common data analysis methods, and they can take significant cleaning to make useful. However, this dataset not only has the data represented in string format, it also has separate columns with the year and hour of the collision represented as doubles, and day of the week and month represented as character strings. Given our focus on finding the riskiest times for travellers in various transportation modes to be on the road in Toronto, the ability to count collisions for individual months or hours, as well as specific dates, will be helpful in drawing conclusions. A preliminary example is shown in (@fig-accidents-per-month), which shows which months have the most collisions reported.
+
+```{r}
+#| label: fig-accidents-per-month
+#| fig-cap: Accidents per Month from 2020-2026
+#| echo: false
+
+# crashes in each month, by month name
+collisions |> # use the regular wide data since we want individual crashes not individual vehicles involved in crashes
+  ggplot(aes(x = factor(OCC_MONTH, c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")), fill = as.factor(OCC_MONTH)))+
+  geom_bar()+
+  theme(axis.text.x = element_text(angle = 55, vjust = 0.9, hjust=1))+
+  scale_fill_paletteer_d("ggthemes::Classic_Cyclic", guide = "none")+
+  labs(
+    x = "Month",
+    y = "Number of Accidents Responded To", 
+  )
+```
 
 ## Missing Spatial Data
-lots of observations are missing spatial data
-renamed the neighbourhood column to be easier to remember
-need to decide what to do with the missing entries
-around 17% of entries do not have a location recorded
+An aspect of our research we may encounter more issues with is spatial data. The dataset includes a column for which Toronto neighbourhood each collision occurred in, as well as a crash latitude and longitude, which could be useful in determining where travellers face the highest risk. However, after visualizing where the most crashes are taking place, we see in (@tbl-missing-spatial-data) that "NAS", or crashes where no spatial data was recorded, is the most frequently occuring value in the Neighbourhood column, making up around 17% of the entries. We will have to determine doing forward whether these should be dropped, or whether our research question could be amended to omit spatial investigation.
+
+```{r}
+#| label: tbl-missing-spatial-data
+#| fig-cap: Top 10 Toronto Neighbourhoods by Number of Accidents from 2020-2026
+#| echo: false
+
+## collisions by neighborhood, descending order
+collisions |>
+  group_by(NEIGHBOURHOOD_158) |>
+  count() |>
+  arrange(desc(n)) |>
+  ungroup() |>
+  mutate(percentage = round(n / sum(n) * 100, 2)) |>
+  rename(Percent_of_Total = percentage) |>
+  rename(Number_of_Collisions = n)
+  head(10)
+# looks like there are many entries where the location was not recorded
+# around 17% of entries do not have a location recorded,
+```
 
 ## Types of Vehicles Stored as Columns
-type of vehicles involved recorded as separate columns
-will need to pivot so each row is an individual vehicle involved in an accident to figure out if trends differ by vehicle type
-make the data tidier
-will eliminate the relationship which shows what combinations of vehicles are colliding, but that is not of convert for our resarch question
+A key part of our analysis is investigating how risk of collision for travellers changes with mode of transportation. To this end, the TPS dataset contains 5 columns, each of which provides a yes/no as to whether cars, public transit vehicles, motorcycles, bicycles, or pedestrians were included in the accident. While this is useful data to have, it is not tidy data, and we will need to pivot the dataframe so each row is an individual vehicle involved in an accident before we can determine trends by vehicle type. (@fig-yes-no-vehicles) shows a basic use case for this pivoted data, and giving us preliminary data about how frequently the various modes of transportation are involved in collisions.
+```{r}
+#| label: fig-yes-no-vehicles
+#| fig-cap: What Types of Vehicles Were Involved in Each Recorded Traffic Collision from 2020-2026
+#| echo: false
+
+# make a data frame to hold that summary data
+counts_by_vehicle_type <- collisions_long |>
+  group_by(Vehicle_Type) |>
+  count(Involved)
+
+# stacked bar to display how many accidents each vehicle was or was not involved in
+counts_by_vehicle_type |>
+  filter((Involved == "YES") | (Involved == "NO")) |>
+  ggplot(aes(x = Vehicle_Type, y = n, fill = Involved)) +
+  geom_col()+
+  theme(axis.text.x = element_text(angle = 40, vjust = 0.9, hjust=1))+
+  labs(
+    x = "Vehicle Type",
+    y = "Number of Accidents"
+  )
+```
 
 # Next Steps
 Having outlined the research question of interest, target data set, and preliminary exploratory data analysis above, we will move into more detailed and thorough analysis of the dataset to identify any trends which could help address the primary research question. Conclusions and discussion, along with raw results and any models used in their generation, will be presented in a final report and oral presentation in August 2026. 
