@@ -42,36 +42,15 @@ The dataset enables a investigation of collision patterns across time, location,
 
 # Research Questions(s) & Hypothesis
 ## Questions
-
-*Stella's Rough Notes: *
-
-*Note: mention using a data first approach, finding an interesting and up to date data set and determining what questions can be answered with it*
-
 *What are the most accident-prone locations and times for travellers in the GTA, and how does that vary depending on mode of transportation?*
  The processed dataset allows us to compare risk profiles across modes, thanks to a indicator for involvements of different modes of travel.
 *Does the GTA’s data align with pre-existing research on riskiest travel times?*
 Prior research frequently identifies holidays as high risk periods for collisions. By analyzing temporal patterns in the TPS dataset, we can test whether Toronto follows these broader trends or shows unique local patterns. This comparison helps contextualize Toronto’s traffic safety landscape within the wider literature on collision risk.
 
 ## Hypotheses
-
-*Stella's Rough Notes:*
-
-*GTA traffic risk is similar to pre-established riskiest days for accidents*
-
-*Some hypotheses we have are...*
-
-*These are of interest because...*
+Before examining the dataset, we have the hypothesis that GTA traffic risk increases during well known high risk periods, such as New Year’s Eve and other major holidays, as well as during late night hours and winter months.
 
 # Relevant Literature
-
-*Stella's Ideas For Potential Sources*
-
-*Days that have statistically the most car accidents*
-
-*Mortality rates of various transportation methods*
-
-*Toronto statistically has the worst traffic*
-
 Scholars consistently conclude that road traffic collisions cluster in both location and time, thus we are inspired on discovering when and where risk is highest in the GTA. Vaz, Tehranchi, and Cusimano (2017) conduct a spatial analysis of road traffic injuries in the Greater Toronto Area using Moran’s I and Getis Ord Gi. The article concludes that collisions form statistically significant clusters rather than occurring randomly. Their results show that “Peel and Durham have the highest collision rate”, which reminds us of the importance to identify hotspots of collisions in different neiboughoods. This directly provides us preview on Toronto collisions by communities.
 Temporal patterns in collision risk are also documented already by scholars. Anowar, Yasmin, and Tay (2013) compare crashes during statutory holidays and regular weekends in Alberta. They find that severe collision occurrences are less than estimated. Certain days (especially major holidays) carry elevated collision risk, which inspires our interest in comparing GTA collision patterns to commonly recognized high risk days.
 
