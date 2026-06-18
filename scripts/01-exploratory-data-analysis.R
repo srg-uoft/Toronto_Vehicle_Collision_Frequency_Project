@@ -30,6 +30,20 @@ glimpse(collisions)
 # character strings include month name, day of the week, and many different "yes/no" variables
 # modes of transportation being separate columns might be tricky, will have to pivot to use mode of transportation as a facet variable
 
+## rename some of the columns to make them easier to understand
+collisions |>
+  rename(INJURIES = INJURY_COLLISIONS) |>
+  rename(FAILURE_TO_REMAIN = FTR_COLLISIONS) |>
+  rename(PROPERTY_DAMAGE_OVER_2000 = PD_COLLISIONS) |>
+  rename(NEIGHBOURHOOD = NEIGHBOURHOOD_158)
+
+## add a new column for month number
+months_df = data.frame(name = c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"), number = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
+
+collisions <- collisions |>
+  inner_join(months_df, by = c("OCC_MONTH" = "name")) |>
+  rename(OCC_MONTH_NUM = number)
+
 ## values
 unique(collisions$OCC_MONTH)
 unique(collisions$OCC_DOW)
@@ -107,8 +121,44 @@ collisions_long |>
 # motorcycles in not that many accidents (surprising)
 
 #################### Space for Drafting Proposal Visuals #######################
+## bar chart for how many vehicles of each type were involved in collisions
+# make a data frame to hold that summary data
+counts_by_vehicle_type <- collisions_long |>
+  group_by(Vehicle_Type) |>
+  count(Involved)
 
+# trying a faceted bar chart
+counts_by_vehicle_type |>
+  ggplot(aes(x = Involved, y = n)) +
+  geom_col() +
+  facet_wrap(vars(Vehicle_Type))
 
+# trying another faceted bar chart
+counts_by_vehicle_type |>
+  filter((Involved == "YES") | (Involved == "NO")) |>
+  ggplot(aes(x = Vehicle_Type, y = n)) +
+  geom_col() +
+  facet_wrap(vars(Involved))
 
+# trying a side by stacked bar chart
+counts_by_vehicle_type |>
+  ggplot(aes(x = Involved, y = n, fill = Vehicle_Type)) +
+  geom_col()
 
+# trying another stacked bar
+counts_by_vehicle_type |>
+  filter((Involved == "YES") | (Involved == "NO")) |>
+  ggplot(aes(x = Vehicle_Type, y = n, fill = Involved)) +
+  geom_col()
 
+## bar charts for crashes per month, per hour, per year, etc
+# crashes in each month
+collisions |> # use the regular wide data since we want individual crashes not individual vehicles involved in crashes
+  ggplot(aes(x = factor(OCC_MONTH_NUM), fill = as.factor(OCC_MONTH_NUM)))+
+  geom_bar()+
+  scale_fill_paletteer_d("ggthemes::Classic_Cyclic", guide = "none")+
+  labs(
+    x = "Month",
+    y = "Number of Accidents Responded To", 
+    title = "Accidents Per Month from 2020-2026"
+  )
