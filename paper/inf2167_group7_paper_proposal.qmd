@@ -21,7 +21,6 @@ bibliography: INF2167_Project_References.bib
 
 # set up our R environment for the report by importing all the libraries we will need
 library(tidyverse)
-library(opendatatoronto)
 ```
 
 # Introduction
@@ -29,8 +28,6 @@ library(opendatatoronto)
 *Stella: I think the goal for this is a brief 1-2 sentences to give an overview of the project*
 
 # Research Questions(s) & Hypothesis
-
-This project will aim to address some research questions and preeminent assumptions about traffic patterns, as discussed below.
 
 ## Questions
 
@@ -71,7 +68,7 @@ congestion in Canadian cities not only costs time and sacrafices productivities,
 
 ### Source
 
-Dataset obtained from [CITE TPS HERE].
+The data used in this analysis is the Traffic Collisions Open Data (ASR-T-TBL-001) dataset, obtained from [@cite-tpsdata] and licensed under the Open Government Licence – Ontario. 
 
 ### Structure
 
@@ -89,7 +86,7 @@ Methods we plan to apply in our analysis are...
 
 ## Overview
 
-Initial exploratory data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse], with the goal of uncovering high-level trends and possible variables of interest for further analysis. Key discoveries which we hope will aid in answering our research question are elaborated on below. 
+Initial exploratory data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse], with the goal of uncovering high-level trends and possible variables of interest for further analysis. Key discoveries which we hope will aid in answering our research question in future reports are elaborated on below. 
 
 ## Key Aspect 1
 

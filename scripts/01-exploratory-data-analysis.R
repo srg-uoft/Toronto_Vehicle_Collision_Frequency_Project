@@ -14,6 +14,17 @@ library(tidyverse)
 #### Read In the Dataset ####
 og_data <- read_csv("data/02 - analysis_data/analysis_data.csv")
 
+#### Establish Goals ####
+# establish goals: looking for classes, values, distributions
+# establish goals: looking for missing data, and also outliers
+# establish goals: see what months, specific days, specific hours, or neighborhoods, have the most accidents
+## also can facet that by mode of transportation to see what that might look like for different modes
+# establish goals: in general, see how many accidents there are per mode of transportation
+
+#### Viewing pieces of the data ####
+# use unique() to see unique values of a column and use table() to get summary stats
+# investigate the dates, as they often have issues and we want to make sure our temporal data is reliable
+
 #### Space for Drafting Proposal Statistics/Tables ####
 
 
