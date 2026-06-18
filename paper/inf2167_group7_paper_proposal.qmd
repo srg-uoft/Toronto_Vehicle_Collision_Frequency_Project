@@ -53,7 +53,7 @@ Temporal patterns in collision risk are also documented already by scholars. An 
 
 # Dataset & Methods
 ## Data Source
-The Toronto Police Service (TPS) maintains a Public Safety Data Portal, where they regularly publish and update crime statistics datasets for the Greater Toronto Area. The data used in this analysis is the Traffic Collisions Open Data (ASR-T-TBL-001) dataset, obtained from [@cite-tpsdata] and licensed under the Open Government Licence – Ontario. 
+The Toronto Police Service (TPS) maintains a Public Safety Data Portal, where they regularly publish and update crime statistics datasets for the Greater Toronto Area. The data used in this analysis is the Traffic Collisions Open Data (ASR-T-TBL-001) dataset, obtained from [@cite-tpsdata] and licensed under the Open Government Licence – Ontario. A notable limitation is that only collisions where TPS were called to the scene are included in this dataset - if for any reason, the involved parties made a decision to not involve the police, their collision statistics will not be reported here. 
 
 ## Data Structure
 Per [@cite-tpsdata], each row/observation in this dataset represents a single collision, and the columns/variables use identification variables to describe each collision in three ways: 1) where and when the collision occurred, 2) whether there were injuries, deaths, or property damage, and whether parties failed to remain at the scene, and 3) which types of vehicles were involved in the collision.
