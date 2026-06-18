@@ -36,6 +36,9 @@ collisions_long <- collisions |>
 )
 
 ```
+#Introduction
+Urban mobility in the Greater Toronto Area (GTA) is shaped by dense traffic volumes, multimodal travel patterns, and complex interactions among different groups (drivers, cyclists, pedestrians, and people taking transits). Understanding conditions and causes of collisions are essential for improving road safety by designing targeted interventions, and aligning municipal planning with evidence based risk patterns. This project adopts a data first approach in exploring a up to date open dataset published by the Toronto Police Service (TPS).
+The dataset enables a investigation of collision patterns across time, location, and mode of travel, via its detailed records in large scale. In this way, we can examine whether collision trends in Toronto align with broader research on high risk travel periods including holidays, along with neighborhoods and modes of transportation with highest safety risks.
 
 # Research Questions(s) & Hypothesis
 ## Questions
@@ -45,8 +48,9 @@ collisions_long <- collisions |>
 *Note: mention using a data first approach, finding an interesting and up to date data set and determining what questions can be answered with it*
 
 *What are the most accident-prone locations and times for travellers in the GTA, and how does that vary depending on mode of transportation?*
-
+ The processed dataset allows us to compare risk profiles across modes, thanks to a indicator for involvements of different modes of travel.
 *Does the GTA’s data align with pre-existing research on riskiest travel times?*
+Prior research frequently identifies holidays as high risk periods for collisions. By analyzing temporal patterns in the TPS dataset, we can test whether Toronto follows these broader trends or shows unique local patterns. This comparison helps contextualize Toronto’s traffic safety landscape within the wider literature on collision risk.
 
 ## Hypotheses
 
@@ -68,7 +72,8 @@ collisions_long <- collisions |>
 
 *Toronto statistically has the worst traffic*
 
-congestion in Canadian cities not only costs time and sacrafices productivities, but also increases environmental burdens by more greenhouse gas emission. (https://comt.ca/Reports/High%20Cost%20of%20Congestion%202012.pdf)
+Scholars consistently conclude that road traffic collisions cluster in both location and time, thus we are inspired on discovering when and where risk is highest in the GTA. Vaz, Tehranchi, and Cusimano (2017) conduct a spatial analysis of road traffic injuries in the Greater Toronto Area using Moran’s I and Getis Ord Gi. The article concludes that collisions form statistically significant clusters rather than occurring randomly. Their results show that “Peel and Durham have the highest collision rate”, which reminds us of the importance to identify hotspots of collisions in different neiboughoods. This directly provides us preview on Toronto collisions by communities.
+Temporal patterns in collision risk are also documented already by scholars. Anowar, Yasmin, and Tay (2013) compare crashes during statutory holidays and regular weekends in Alberta. They find that severe collision occurrences are less than estimated. Certain days (especially major holidays) carry elevated collision risk, which inspires our interest in comparing GTA collision patterns to commonly recognized high risk days.
 
 # Dataset & Methods
 ## Dataset
