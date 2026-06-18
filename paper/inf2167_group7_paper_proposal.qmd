@@ -8,6 +8,11 @@ thanks: "Code and data are available at: [https://github.com/srg-uoft/INF2167_Gr
 date: today
 date-format: long
 format: pdf
+geometry:
+      - inner=2.5cm
+      - outer=2.5cm
+      - top=2.5cm
+      - bottom=3.5cm
 number-sections: true
 bibliography: INF2167_Project_References.bib
 ---
@@ -36,44 +41,58 @@ collisions_long <- collisions |>
 )
 
 ```
+
 # Introduction
+
 Travel pattern in the Greater Toronto Area (GTA) involves dense traffic volumes, multimodal travel, and complex interactions among different groups (drivers, cyclists, pedestrians, and transit users). Understanding when and where collisions occur is essential for designing targeted safety interventions and supporting evidence based municipal planning. Our project applies a data driven approach using an up to date collision dataset published by the Toronto Police Service (TPS), whose detailed records enable analysis of temporal and spatial patterns with different modes of travel. Through this dataset, we assess whether Toronto’s collision trends align with broader research on travel periods with higher risks and identify neighborhoods with elevated safety risks involving different travel modes.
 
 # Research Questions
+
 ## What are the most accident-prone locations and times for travellers in the GTA, and how does that vary depending on mode of transportation?
+
 The processed dataset allows us to compare risk profiles across modes, thanks to a indicator for involvements of different modes of travel.
 
 ## Does the GTA’s data align with pre-existing research on riskiest travel times?
+
 Prior research frequently identifies holidays as high risk periods for collisions. By analyzing temporal patterns in the TPS dataset, we can test whether Toronto follows these broader trends or shows unique local patterns. This comparison helps contextualize Toronto’s traffic safety landscape within the wider literature on collision risk.
 
 # Relevant Literature
-Scholars consistently conclude that road traffic collisions cluster in both location and time, thus we are inspired on discovering when and where risk is highest in the GTA. A spatial analysis of road traffic injuries is conducted in the Greater Toronto Area [@Vaz2017GTA] using Moran’s I and Getis Ord Gi. The article concludes that collisions form statistically significant clusters rather than occurring randomly. Their results show that “Peel and Durham have the highest collision rate”, which reminds us of the importance to identify hotspots of collisions in different neiboughoods. This directly provides us preview on Toronto collisions by communities.
-Temporal patterns in collision risk are also documented already by scholars. An article compares crashes during statutory holidays and regular weekends in Alberta [@Anowar2013Holidays]. They find that severe collision occurrences are less than estimated. Certain days (especially major holidays) carry elevated collision risk, which inspires our interest in comparing GTA collision patterns to commonly recognized high risk days.
+
+Scholars consistently conclude that road traffic collisions cluster in both location and time, thus we are inspired on discovering when and where risk is highest in the GTA. A spatial analysis of road traffic injuries is conducted in the Greater Toronto Area [@Vaz2017GTA] using Moran’s I and Getis Ord Gi. The article concludes that collisions form statistically significant clusters rather than occurring randomly. Their results show that “Peel and Durham have the highest collision rate”, which reminds us of the importance to identify hotspots of collisions in different neiboughoods. This directly provides us preview on Toronto collisions by communities. Temporal patterns in collision risk are also documented already by scholars. An article compares crashes during statutory holidays and regular weekends in Alberta [@Anowar2013Holidays]. They find that severe collision occurrences are less than estimated. Certain days (especially major holidays) carry elevated collision risk, which inspires our interest in comparing GTA collision patterns to commonly recognized high risk days.
 
 # Dataset & Methods
+
 ## Data Source
-The Toronto Police Service (TPS) maintains a Public Safety Data Portal, where they regularly publish and update crime statistics datasets for the Greater Toronto Area. The data used in this analysis is the Traffic Collisions Open Data (ASR-T-TBL-001) dataset, obtained from [@cite-tpsdata] and licensed under the Open Government Licence – Ontario. A notable limitation is that only collisions where TPS were called to the scene are included in this dataset - if for any reason, the involved parties made a decision to not involve the police, their collision statistics will not be reported here. 
+
+The Toronto Police Service (TPS) maintains a Public Safety Data Portal, where they regularly publish and update crime statistics datasets for the Greater Toronto Area. The data used in this analysis is the Traffic Collisions Open Data (ASR-T-TBL-001) dataset, obtained from [@cite-tpsdata] and licensed under the Open Government Licence – Ontario. A notable limitation is that only collisions where TPS were called to the scene are included in this dataset - if for any reason, the involved parties made a decision to not involve the police, their collision statistics will not be reported here.
 
 ## Data Structure
+
 Per [@cite-tpsdata], each row/observation in this dataset represents a single collision, and the columns/variables use identification variables to describe each collision in three ways: 1) where and when the collision occurred, 2) whether there were injuries, deaths, or property damage, and whether parties failed to remain at the scene, and 3) which types of vehicles were involved in the collision.
 
 ## Dataset Key Variables
-To answer the question of where the highest risk of traffic collision for various modes of transportation is in the Greater Toronto Area, our primary variables of interest are the spatial and temporal variables (to determine where and when the most accidents occur), and the information about involved vehicles (to determine any diverging trends between modes of transportation). 
+
+To answer the question of where the highest risk of traffic collision for various modes of transportation is in the Greater Toronto Area, our primary variables of interest are the spatial and temporal variables (to determine where and when the most accidents occur), and the information about involved vehicles (to determine any diverging trends between modes of transportation).
 
 ## Methods
-We plan on evaluating trends using statistics summary tables and visuals, using bar charts, line graphs, and summarized variable counts to show trends in accident frequency for different vehicle types at different points in the year, or in different Toronto neighborhoods. To reveal trends for separate vehicle types, we will use data pivoting to turn separate transportation columns into individual rows, as well as grouping and faceting in our visuals to show differences in collision frequency. 
+
+We plan on evaluating trends using statistics summary tables and visuals, using bar charts, line graphs, and summarized variable counts to show trends in accident frequency for different vehicle types at different points in the year, or in different Toronto neighborhoods. To reveal trends for separate vehicle types, we will use data pivoting to turn separate transportation columns into individual rows, as well as grouping and faceting in our visuals to show differences in collision frequency.
 
 # Exploratory Data Analysis
+
 ## Overview
-Initial exploratory data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse], with the goal of uncovering high-level trends and possible variables of interest for further analysis. Filepaths were made relative using the Here package [@cite-here] to improve reproducibility, and color palettes are courtesy of [@cite-paletteer]. Key discoveries which we hope will aid in answering our research question in future reports are elaborated on below. 
+
+Initial exploratory data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse], with the goal of uncovering high-level trends and possible variables of interest for further analysis. Filepaths were made relative using the Here package [@cite-here] to improve reproducibility, and color palettes are courtesy of [@cite-paletteer]. Key discoveries which we hope will aid in answering our research question in future reports are elaborated on below.
 
 ## Separated Temporal Variables
+
 As mentioned in [@cite-tellingstorieswithdata], dates can be inconsistent and difficult to work with, and can take significant cleaning to make useful. However, this dataset not only contains full date-time strings, but also has separate columns for year, month name, hour of the day, and day of the week, all with expected double or character data types, allowing for significant granularity in analysis without extra pre-processing. This is particularly useful for our research question, given its focus on broadly analyzing temporal trends in collision risk. An exploratory example of using this temporal data is (@fig-accidents-per-month), showing which months have the most collisions reported.
 
 ```{r}
 #| label: fig-accidents-per-month
 #| fig-cap: Accidents per Month from 2020-2026
 #| echo: false
+#| fig-pos: "H"
 
 # crashes in each month, by month name
 collisions |> # use the regular wide data since we want individual crashes not individual vehicles involved in crashes
@@ -88,33 +107,18 @@ collisions |> # use the regular wide data since we want individual crashes not i
 ```
 
 ## Missing Spatial Data
-An aspect we may encounter more issues with is spatial data. The dataset includes a column for which Toronto neighborhood each collision occurred in, as well as a crash latitude and longitude, which could be useful in determining where travelers face the highest risk. However, we see in (@tbl-missing-spatial-data) that "NAS", or crashes where no spatial data was recorded, is the most frequently occurring value in the "NEIGHBOURHOOD-158" column, comprising around 17% of entries. We will have to determine what the implications would be for dropping these observations, or whether to amend our research question to only focus on temporal risk trends.
 
-```{r}
-#| label: tbl-missing-spatial-data
-#| fig-cap: Top 6 Toronto Neighbourhoods by Number of Accidents from 2020-2026
-#| echo: false
-
-## collisions by neighborhood, descending order
-collisions |>
-  group_by(NEIGHBOURHOOD_158) |>
-  count() |>
-  arrange(desc(n)) |>
-  ungroup() |>
-  mutate(percentage = round(n / sum(n) * 100, 2)) |>
-  rename(Percent_of_Total = percentage) |>
-  rename(Number_of_Collisions = n) |>
-  head(6)
-# looks like there are many entries where the location was not recorded
-# around 17% of entries do not have a location recorded,
-```
+An aspect we may encounter more issues with is spatial data. The dataset includes a column for which Toronto neighborhood each collision occurred in, as well as a crash latitude and longitude, which could be useful in determining where travelers face the highest risk. However, entries listed as "NAS", or crashes where no spatial data was recorded, are the most frequently occurring value in the "NEIGHBOURHOOD-158" column, comprising around 17% of entries. We will have to determine what the implications would be for dropping these observations, or whether to amend our research question to only focus on temporal risk trends.
 
 ## Types of Vehicles Stored as Columns
+
 A key part of our analysis involves seeing how risky travel times change for different vehicle types. The TPS dataset contains 5 columns of particular interest for this, each providing a yes/no binary as to whether cars, public transit vehicles, motorcycles, bicycles, or pedestrians were involved in the accident. By pivoting the dataframe so each row is an individual vehicle involved in an accident (rather than a separate variable), we can determine trends by vehicle type. (@fig-yes-no-vehicles) shows a basic use case for this pivoted data, assessing how frequently various vehicle types are involved in collisions.
+
 ```{r}
 #| label: fig-yes-no-vehicles
-#| fig-cap: What Types of Vehicles Were Involved in Each Recorded Traffic Collision from 2020-2026
+#| fig-cap: What Types of Vehicles Were Involved in Traffic Collisions from 2020-2026
 #| echo: false
+#| fig-pos: "H"
 
 # make a data frame to hold that summary data
 counts_by_vehicle_type <- collisions_long |>
@@ -134,7 +138,8 @@ counts_by_vehicle_type |>
 ```
 
 # Next Steps
-Having outlined our research questions, gathered data, and conducted preliminary exploratory data analysis, our next steps are conduct deeper analysis to identify further trends in collision risk. Conclusions and discussion, along with raw results and any models used, will be presented in a final report and oral presentation in August 2026. 
+
+Having outlined our research questions, gathered data, and conducted preliminary exploratory data analysis, our next steps are conduct deeper analysis to identify further trends in collision risk. Conclusions and discussion, along with raw results and any models used, will be presented in a final report and oral presentation in August 2026.
 
 \newpage
 
