@@ -80,16 +80,23 @@ Methods we plan to employ include line charts for trends in accidents over time,
 
 # Exploratory Data Analysis
 ## Overview
-Initial exploratory data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse], with the goal of uncovering high-level trends and possible variables of interest for further analysis. Filepaths were made relative using the Here package [@cite-here] to improve reproducibility. Key discoveries which we hope will aid in answering our research question in future reports are elaborated on below. 
-
-## Types of Vehicles Stored as Columns
-One key dataset aspect that relates to our variables of interest is...
+Initial exploratory data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse], with the goal of uncovering high-level trends and possible variables of interest for further analysis. Filepaths were made relative using the Here package [@cite-here] to improve reproducibility, and color palettes are courtesy of [@cite-paletteer]. Key discoveries which we hope will aid in answering our research question in future reports are elaborated on below. 
 
 ## Combined & Separated Temporal Variables
-Another key dataset aspect that relates to our variables of interest is...
+valuable to have both separated temporal variable components and a combined string
+can evaluate if there are months or hours where more accidents occurred 
 
 ## Missing Spatial Data
-Another key dataset aspect that relates to our variables of interest is...
+lots of observations are missing spatial data
+renamed the neighbourhood column to be easier to remember
+need to decide what to do with the missing entries
+around 17% of entries do not have a location recorded
+
+## Types of Vehicles Stored as Columns
+type of vehicles involved recorded as separate columns
+will need to pivot so each row is an individual vehicle involved in an accident to figure out if trends differ by vehicle type
+make the data tidier
+will eliminate the relationship which shows what combinations of vehicles are colliding, but that is not of convert for our resarch question
 
 # Next Steps
 Having outlined the research question of interest, target data set, and preliminary exploratory data analysis above, we will move into more detailed and thorough analysis of the dataset to identify any trends which could help address the primary research question. Conclusions and discussion, along with raw results and any models used in their generation, will be presented in a final report and oral presentation in August 2026. 
