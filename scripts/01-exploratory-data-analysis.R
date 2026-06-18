@@ -10,9 +10,10 @@
 
 #### Import Required Libraries ####
 library(tidyverse)
+library(here)
 
 #### Read In the Dataset ####
-og_data <- read_csv("data/02 - analysis_data/analysis_data.csv")
+collisions <- read_csv(here("data/02 - analysis data", "working-data-2020-2026.csv"))
 
 #### Establish Goals ####
 # establish goals: looking for classes, values, distributions
