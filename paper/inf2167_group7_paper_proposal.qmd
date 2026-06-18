@@ -36,19 +36,16 @@ collisions_long <- collisions |>
 )
 
 ```
-#Introduction
+# Introduction
 Urban mobility in the Greater Toronto Area (GTA) is shaped by dense traffic volumes, multimodal travel patterns, and complex interactions among different groups (drivers, cyclists, pedestrians, and people taking transits). Understanding conditions and causes of collisions are essential for improving road safety by designing targeted interventions, and aligning municipal planning with evidence based risk patterns. This project adopts a data first approach in exploring a up to date open dataset published by the Toronto Police Service (TPS).
 The dataset enables a investigation of collision patterns across time, location, and mode of travel, via its detailed records in large scale. In this way, we can examine whether collision trends in Toronto align with broader research on high risk travel periods including holidays, along with neighborhoods and modes of transportation with highest safety risks.
 
-# Research Questions(s) & Hypothesis
-## Questions
-*What are the most accident-prone locations and times for travellers in the GTA, and how does that vary depending on mode of transportation?*
- The processed dataset allows us to compare risk profiles across modes, thanks to a indicator for involvements of different modes of travel.
-*Does the GTA’s data align with pre-existing research on riskiest travel times?*
-Prior research frequently identifies holidays as high risk periods for collisions. By analyzing temporal patterns in the TPS dataset, we can test whether Toronto follows these broader trends or shows unique local patterns. This comparison helps contextualize Toronto’s traffic safety landscape within the wider literature on collision risk.
+# Research Questions
+## What are the most accident-prone locations and times for travellers in the GTA, and how does that vary depending on mode of transportation?
+The processed dataset allows us to compare risk profiles across modes, thanks to a indicator for involvements of different modes of travel.
 
-## Hypotheses
-Before examining the dataset, we have the hypothesis that GTA traffic risk increases during well known high risk periods, such as New Year’s Eve and other major holidays, as well as during late night hours and winter months.
+## Does the GTA’s data align with pre-existing research on riskiest travel times?
+Prior research frequently identifies holidays as high risk periods for collisions. By analyzing temporal patterns in the TPS dataset, we can test whether Toronto follows these broader trends or shows unique local patterns. This comparison helps contextualize Toronto’s traffic safety landscape within the wider literature on collision risk.
 
 # Relevant Literature
 Scholars consistently conclude that road traffic collisions cluster in both location and time, thus we are inspired on discovering when and where risk is highest in the GTA. Vaz, Tehranchi, and Cusimano (2017) conduct a spatial analysis of road traffic injuries in the Greater Toronto Area using Moran’s I and Getis Ord Gi. The article concludes that collisions form statistically significant clusters rather than occurring randomly. Their results show that “Peel and Durham have the highest collision rate”, which reminds us of the importance to identify hotspots of collisions in different neiboughoods. This directly provides us preview on Toronto collisions by communities.
@@ -96,7 +93,7 @@ An aspect we may encounter more issues with is spatial data. The dataset include
 
 ```{r}
 #| label: tbl-missing-spatial-data
-#| fig-cap: Top 10 Toronto Neighbourhoods by Number of Accidents from 2020-2026
+#| fig-cap: Top 6 Toronto Neighbourhoods by Number of Accidents from 2020-2026
 #| echo: false
 
 ## collisions by neighborhood, descending order
@@ -107,8 +104,8 @@ collisions |>
   ungroup() |>
   mutate(percentage = round(n / sum(n) * 100, 2)) |>
   rename(Percent_of_Total = percentage) |>
-  rename(Number_of_Collisions = n)
-  head(10)
+  rename(Number_of_Collisions = n) |>
+  head(6)
 # looks like there are many entries where the location was not recorded
 # around 17% of entries do not have a location recorded,
 ```
