@@ -28,6 +28,7 @@ bibliography: INF2167_Project_References.bib
 library(tidyverse)
 library(here)
 library(paletteer)
+library(janitor)
 
 # enable visual generation by importing the dataset
 collisions <- read_csv(here("data/02 - analysis data", "working-data-2020-2026.csv"))
