@@ -4,7 +4,7 @@ subtitle: "INF2167 Project - Group 7"
 author: 
   - Stella Gregorski
   - Yiying Qin
-thanks: "Code and data are available at: [https://github.com/srg-uoft/INF2167_Group7_Project](https://github.com/srg-uoft/INF2167_Group7_Project)."
+thanks: "Code and data are available at: [https://github.com/srg-uoft/Toronto_Vehicle_Collision_Frequency_Project](https://github.com/srg-uoft/Toronto_Vehicle_Collision_Frequency_Project)."
 date: today
 date-format: long
 format: pdf
