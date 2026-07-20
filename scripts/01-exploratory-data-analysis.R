@@ -8,7 +8,7 @@
 # License: MIT
 # Pre-requisites: please install the Tidyverse, Here, and Janitor packages on your local 
 #                 machine ahead of time, as well as load the project GitHub repository 
-#                 so the relative filepaths will function as intended.
+#                 as an R project so the relative filepaths will function as intended.
 
 ########################### Import Required Libraries ##########################
 library(tidyverse)
