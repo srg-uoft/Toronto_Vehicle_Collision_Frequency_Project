@@ -106,7 +106,7 @@ we also need to include models per inessa's feedback on the proposal
 # Results & Findings
 *a.	Present the results of your analysis and provide clear interpretation. Include appropriate graphs, tables, or other visualizations.*
 
-# Discussion & Conclusion
+# Discussion
 *a.	Summarize your findings, discuss any limitations, and suggest possible areas for future research.*
 
 ## Findings & Implications
