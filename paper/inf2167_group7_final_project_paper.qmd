@@ -1,0 +1,122 @@
+---
+title: "Collision Frequency Trends for Various Vehicle Types in the Greater Toronto Area"
+subtitle: "INF2167 Project - Group 7"
+author: 
+  - Stella Gregorski
+  - Yiying Qin
+thanks: "Code and data are available at: [https://github.com/srg-uoft/Toronto_Vehicle_Collision_Frequency_Project](https://github.com/srg-uoft/Toronto_Vehicle_Collision_Frequency_Project)."
+date: today
+date-format: long
+format: pdf
+geometry:
+      - inner=2.5cm
+      - outer=2.5cm
+      - top=2.5cm
+      - bottom=3.5cm
+number-sections: true
+bibliography: INF2167_Project_References.bib
+abstract: "Provide a short (~150 word) abstract that includes the main problem you investigated, your data and methods, findings, and contribution(s)."
+---
+
+\newpage
+
+```{r}
+#| include: false
+#| warning: false
+#| message: false
+
+# set up our R environment for the report by importing all the libraries we will need
+library(tidyverse)
+library(here)
+library(paletteer)
+library(janitor)
+library(taylor)
+
+# enable visual generation by importing the dataset
+collisions <- read_csv(here("data/02 - analysis data", "working-data-2020-2026.csv"))
+
+# enable further visual generation by making a long, tidy version of the data
+## rename some of the columns to make them easier to understand
+collisions_cleaned <- collisions |>
+  rename(INJURIES = INJURY_COLLISIONS) |>
+  rename(FAILURE_TO_REMAIN = FTR_COLLISIONS) |>
+  rename(PROPERTY_DAMAGE_OVER_2000 = PD_COLLISIONS) |>
+  rename(NEIGHBOURHOOD = NEIGHBOURHOOD_158)
+
+## changing column names to snake_case using janitor
+collisions_cleaned <- collisions_cleaned |>
+  clean_names()
+
+## make a long version of the data to pivot mode of transportation
+collisions_long <- collisions_cleaned |>
+  pivot_longer(
+    cols = c(automobile, motorcycle, passenger, bicycle, pedestrian), 
+    names_to = "vehicle_type", 
+    values_to = "involved_yesno"
+)
+```
+
+# Introduction
+## Project Overview 
+*a.	Provide an overview of your project, the data and methods, and main finding(s).*
+we can probably re-use some things from the proposal introduction section for this, but should make sure we modify it to discuss our methods and findings.
+
+## Research Questions 
+*b.	Clearly state the research question(s) you investigated.*
+### What are the most accident-prone locations and times for travellers in the GTA, and how does that vary depending on mode of transportation?
+
+The processed dataset allows us to compare risk profiles across modes, thanks to a indicator for involvements of different modes of travel.
+
+### Does the GTA’s data align with pre-existing research on riskiest travel times?
+
+Prior research frequently identifies holidays as high risk periods for collisions. By analyzing temporal patterns in the TPS dataset, we can test whether Toronto follows these broader trends or shows unique local patterns. This comparison helps contextualize Toronto’s traffic safety landscape within the wider literature on collision risk.
+
+## Hypotheses 
+*c.	Include any hypotheses and explain why these questions are of interest.*
+this will be important, since a feedback point we got on our proposal was that we needed to more clearly state our hypotheses
+
+# Relevant Literature
+
+Scholars consistently conclude that road traffic collisions cluster in both location and time, thus we are inspired on discovering when and where risk is highest in the GTA. A spatial analysis of road traffic injuries is conducted in the Greater Toronto Area [@Vaz2017GTA] using Moran’s I and Getis Ord Gi. The article concludes that collisions form statistically significant clusters rather than occurring randomly. Their results show that “Peel and Durham have the highest collision rate”, which reminds us of the importance to identify hotspots of collisions in different neiboughoods. This directly provides us preview on Toronto collisions by communities. Temporal patterns in collision risk are also documented already by scholars. An article compares crashes during statutory holidays and regular weekends in Alberta [@Anowar2013Holidays]. They find that severe collision occurrences are less than estimated. Certain days (especially major holidays) carry elevated collision risk, which inspires our interest in comparing GTA collision patterns to commonly recognized high risk days.
+
+# Dataset & Methods
+
+## Data Source
+
+The Toronto Police Service (TPS) maintains a Public Safety Data Portal, where they regularly publish and update crime statistics datasets for the Greater Toronto Area. The data used in this analysis is the Traffic Collisions Open Data (ASR-T-TBL-001) dataset, obtained from [@cite-tpsdata] and licensed under the Open Government Licence – Ontario. A notable limitation is that only collisions where TPS were called to the scene are included in this dataset - if for any reason, the involved parties made a decision to not involve the police, their collision statistics will not be reported here.
+
+## Data Structure
+
+Per [@cite-tpsdata], each row/observation in this dataset represents a single collision, and the columns/variables use identification variables to describe each collision in three ways: 1) where and when the collision occurred, 2) whether there were injuries, deaths, or property damage, and whether parties failed to remain at the scene, and 3) which types of vehicles were involved in the collision.
+
+## Dataset Key Variables
+
+To answer the question of where the highest risk of traffic collision for various modes of transportation is in the Greater Toronto Area, our primary variables of interest are the spatial and temporal variables (to determine where and when the most accidents occur), and the information about involved vehicles (to determine any diverging trends between modes of transportation).
+
+## Methods
+
+*b.	Discuss the methods and models you applied in your analysis. Please include notation for your model. *
+
+Initial exploratory data analysis was done using statistical programming language [@cite-R] and the Tidyverse library [@cite-tidyverse], with the goal of uncovering high-level trends and possible variables of interest for further analysis. Filepaths were made relative using the Here package [@cite-here] to improve reproducibility, data was cleaned using [@cite-janitor], and color palettes are courtesy of [@cite-paletteer] and [@cite-taylor].
+
+we will need to adjust this methods section from what it was in the proposal, so it reflects what we actually did, rather than what we plan to do
+we also need to include models per inessa's feedback on the proposal
+
+# Results & Findings
+*a.	Present the results of your analysis and provide clear interpretation. Include appropriate graphs, tables, or other visualizations.*
+
+# Discussion & Conclusion
+*a.	Summarize your findings, discuss any limitations, and suggest possible areas for future research.*
+
+## Findings & Implications
+## Limitations
+## Future Research
+
+# Conclusion
+
+\newpage
+
+# References
+
+::: {#refs}
+:::
