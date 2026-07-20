@@ -158,9 +158,13 @@ counts_by_vehicle_type |>
   ggplot(aes(x = vehicle_type, y = n, fill = involved_yesno)) +
   geom_col()+
   theme(axis.text.x = element_text(angle = 40, vjust = 0.9, hjust=1))+
+  scale_y_continuous(labels = scales::comma)+
+  scale_fill_taylor_d(album = "Midnights", labels = c('Yes', 'No'))+
   labs(
     x = "Vehicle Type",
-    y = "Number of Accidents"
+    y = "Number of Accidents",
+    title = "Whether Each Vehicle Type was in Each Reported Accident",
+    fill = "Involved in Crash"
   )
 
 ## bar charts for crashes per month, per hour, per year, etc
