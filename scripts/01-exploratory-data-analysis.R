@@ -6,13 +6,15 @@
 # Date: May-August 2026
 # Contact: stella.gregorski@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: please install the Tidyverse and Here packages on your local 
+# Pre-requisites: please install the Tidyverse, Here, and Janitor packages on your local 
 #                 machine ahead of time, as well as load the project GitHub repository 
 #                 so the relative filepaths will function as intended.
 
 ########################### Import Required Libraries ##########################
 library(tidyverse)
 library(here)
+library(janitor)
+library(paletteer)
 
 ########################### Read In the Dataset ################################
 collisions <- read_csv(here("data/02 - analysis data", "working-data-2020-2026.csv"))
@@ -22,7 +24,7 @@ collisions <- read_csv(here("data/02 - analysis data", "working-data-2020-2026.c
 ## also can facet that by mode of transportation to see what that might look like for different modes
 # establish goals: in general, see how many accidents there are per mode of transportation
 
-######################### Viewing pieces of the data ###########################
+########################## Viewing & Cleaning Data #############################
 ## classes
 glimpse(collisions)
 # looks like all columns are either numeric doubles or strings of characters
@@ -31,35 +33,40 @@ glimpse(collisions)
 # modes of transportation being separate columns might be tricky, will have to pivot to use mode of transportation as a facet variable
 
 ## rename some of the columns to make them easier to understand
-collisions |>
+collisions_cleaned <- collisions |>
   rename(INJURIES = INJURY_COLLISIONS) |>
   rename(FAILURE_TO_REMAIN = FTR_COLLISIONS) |>
   rename(PROPERTY_DAMAGE_OVER_2000 = PD_COLLISIONS) |>
   rename(NEIGHBOURHOOD = NEIGHBOURHOOD_158)
 
+## changing column names to snake_case using janitor
+collisions_cleaned <- collisions_cleaned |>
+  clean_names()
+head(collisions_cleaned)
+
 ## add a new column for month number
 months_df = data.frame(name = c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"), number = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12))
 
-collisions <- collisions |>
-  inner_join(months_df, by = c("OCC_MONTH" = "name")) |>
-  rename(OCC_MONTH_NUM = number)
+collisions_cleaned <- collisions_cleaned |>
+  left_join(months_df, by = c("occ_month" = "name")) |>
+  rename(occ_month_num = number)
 
 ## values
-unique(collisions$OCC_MONTH)
-unique(collisions$OCC_DOW)
+unique(collisions_cleaned$occ_month)
+unique(collisions$occ_dow)
 # unique values of months and days of the week seem to make sense
 
-unique(collisions$OCC_HOUR)
+unique(collisions_cleaned$occ_hour)
 # collisions have occurred in every possible hour of the day
 
-table(collisions$FATALITIES)
+table(collisions_cleaned$fatalities)
 # a vast majority of collisions had no fatalities
 # 2 fatalities or above could be considered outliers, total of 7 collisions of that caliber in 370000
 
 ################ Space for Drafting Proposal Statistics/Tables #################
 ## collisions by neighborhood, descending order
-collisions |>
-  group_by(NEIGHBOURHOOD_158) |>
+collisions_cleaned |>
+  group_by(neighbourhood) |>
   count() |>
   arrange(desc(n)) |>
   ungroup() |>
@@ -70,8 +77,8 @@ collisions |>
 # otherwise, given that the next 
 
 ## collisions by month, descending order
-collisions |>
-  group_by(OCC_MONTH) |>
+collisions_cleaned |>
+  group_by(occ_month) |>
   count() |>
   arrange(desc(n)) |>
   ungroup() |>
@@ -82,8 +89,8 @@ collisions |>
 # all percentages are fairly close, there isn't one clear runaway month
 
 ## collisions by hour, descending order
-collisions |>
-  group_by(OCC_HOUR) |>
+collisions_cleaned |>
+  group_by(occ_hour) |>
   count() |>
   arrange(desc(n)) |>
   ungroup() |>
@@ -94,8 +101,8 @@ collisions |>
 
 ## are there specific dates that have the most accidents
 ## collisions by month, descending order
-collisions |>
-  group_by(OCC_DATE) |>
+collisions_cleaned |>
+  group_by(occ_date) |>
   count() |>
   arrange(desc(n)) |>
   ungroup() |>
@@ -104,18 +111,18 @@ collisions |>
 # percentages are all small but there were nearly twice the number of accidents on day #1 as on day #10 so that's something?
 
 ## make a long version of the data to pivot mode of transportation
-collisions_long <- collisions |>
+collisions_long <- collisions_cleaned |>
   pivot_longer(
-    cols = c(AUTOMOBILE, MOTORCYCLE, PASSENGER, BICYCLE, PEDESTRIAN), 
-    names_to = "Vehicle_Type", 
-    values_to = "Involved"
+    cols = c(automobile, motorcycle, passenger, bicycle, pedestrian), 
+    names_to = "vehicle_type", 
+    values_to = "involved_yesno"
 )
 
 ## use the long data to group accidents by vehicle involved
 collisions_long |>
-  group_by(Vehicle_Type) |>
-  count(Involved) |>
-  filter(Involved == "YES") |>
+  group_by(vehicle_type) |>
+  count(involved_yesno) |>
+  filter(involved_yesno == "YES") |>
   arrange(desc(n))
 # far more cars involved in accidents than any other type of vehicle, to be expected
 # motorcycles in not that many accidents (surprising)
@@ -124,31 +131,31 @@ collisions_long |>
 ## bar chart for how many vehicles of each type were involved in collisions
 # make a data frame to hold that summary data
 counts_by_vehicle_type <- collisions_long |>
-  group_by(Vehicle_Type) |>
-  count(Involved)
+  group_by(vehicle_type) |>
+  count(involved_yesno)
 
 # trying a faceted bar chart
 counts_by_vehicle_type |>
-  ggplot(aes(x = Involved, y = n)) +
+  ggplot(aes(x = involved_yesno, y = n)) +
   geom_col() +
-  facet_wrap(vars(Vehicle_Type))
+  facet_wrap(vars(vehicle_type))
 
 # trying another faceted bar chart
 counts_by_vehicle_type |>
-  filter((Involved == "YES") | (Involved == "NO")) |>
-  ggplot(aes(x = Vehicle_Type, y = n)) +
+  filter((involved_yesno == "YES") | (involved_yesno == "NO")) |>
+  ggplot(aes(x = vehicle_type, y = n)) +
   geom_col() +
-  facet_wrap(vars(Involved))
+  facet_wrap(vars(involved_yesno))
 
 # trying a side by stacked bar chart
 counts_by_vehicle_type |>
-  ggplot(aes(x = Involved, y = n, fill = Vehicle_Type)) +
+  ggplot(aes(x = involved_yesno, y = n, fill = vehicle_type)) +
   geom_col()
 
 # trying another stacked bar
 counts_by_vehicle_type |>
-  filter((Involved == "YES") | (Involved == "NO")) |>
-  ggplot(aes(x = Vehicle_Type, y = n, fill = Involved)) +
+  filter((involved_yesno == "YES") | (involved_yesno == "NO")) |>
+  ggplot(aes(x = vehicle_type, y = n, fill = involved_yesno)) +
   geom_col()+
   theme(axis.text.x = element_text(angle = 40, vjust = 0.9, hjust=1))+
   labs(
@@ -158,8 +165,8 @@ counts_by_vehicle_type |>
 
 ## bar charts for crashes per month, per hour, per year, etc
 # crashes in each month, by month number
-collisions |> # use the regular wide data since we want individual crashes not individual vehicles involved in crashes
-  ggplot(aes(x = factor(OCC_MONTH_NUM), fill = as.factor(OCC_MONTH_NUM)))+
+collisions_cleaned |> # use the regular wide data since we want individual crashes not individual vehicles involved in crashes
+  ggplot(aes(x = factor(occ_month_num), fill = as.factor(occ_month_num)))+
   geom_bar()+
   scale_fill_paletteer_d("ggthemes::Classic_Cyclic", guide = "none")+
   labs(
@@ -169,8 +176,8 @@ collisions |> # use the regular wide data since we want individual crashes not i
   )
 
 # crashes in each month, by month name
-collisions |> # use the regular wide data since we want individual crashes not individual vehicles involved in crashes
-  ggplot(aes(x = factor(OCC_MONTH, c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")), fill = as.factor(OCC_MONTH)))+
+collisions_cleaned |> # use the regular wide data since we want individual crashes not individual vehicles involved in crashes
+  ggplot(aes(x = factor(occ_month, c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")), fill = as.factor(occ_month)))+
   geom_bar()+
   theme(axis.text.x = element_text(angle = 55, vjust = 0.9, hjust=1))+
   scale_fill_paletteer_d("ggthemes::Classic_Cyclic", guide = "none")+
