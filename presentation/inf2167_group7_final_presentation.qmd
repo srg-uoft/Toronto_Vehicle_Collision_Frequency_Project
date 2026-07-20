@@ -1,0 +1,37 @@
+---
+title: "Collision Frequency Trends for Various Vehicle Types in the Greater Toronto Area"
+subtitle: "INF2167 Project - Group 7"
+author: 
+  - Stella Gregorski
+  - Yiying Qin
+format: 
+  revealjs:
+    slide-number: true
+    pdf-separate-fragments: true
+    theme: dracula
+editor: visual
+date: today
+date-format: long
+bibliography: Presentation_References.bib
+---
+
+## Introduction
+
+## Motivation
+
+## Data
+
+## Methods
+
+This project used the R programming language [@cite-R] and the Here library [@cite-here] to do reproducible data analysis.
+
+## Findings
+
+## Future Research
+
+## Conclusion
+
+## References
+
+::: {#refs}
+:::
