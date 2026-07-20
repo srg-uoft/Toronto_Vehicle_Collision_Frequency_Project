@@ -16,20 +16,29 @@ bibliography: Presentation_References.bib
 ---
 
 ## Introduction
+- Provide background on the topic
 
 ## Motivation
+- Introduce the main research question or problem
+- Explain why the project is important
 
 ## Data
+- Describe the data sources used
+- How the data were collected or constructed
 
 ## Methods
-
-This project used the R programming language [@cite-R] and the Here library [@cite-here] to do reproducible data analysis.
+- Methods or analytical approaches used to address the research question
+- This project used the R programming language [@cite-R] and the Here library [@cite-here] to do reproducible data analysis.
 
 ## Findings
+- Present the main results, patterns, or insights from the analysis
 
-## Future Research
+## Implications
+- Discuss findings and what they may indicate
 
 ## Conclusion
+- Key takeaways from the project, including the broader implications or contributions of the work
+- Future research ideas
 
 ## References
 
